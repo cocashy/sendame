@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sendame</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <header>
+    <h1>Sendame</h1>
+  </header>
+  <div class="container" id="game-board">
+    <div class="row" id="signal">
+      <div>🔴</div>
+      <div>🔴</div>
+      <div>🟢</div>
+    </div>
+    <div class="row" id="opponent-charge">
+      <div>⚫️</div>
+      <div>⚫️</div>
+      <div>⚫️</div>
+    </div>
+    <div class="row" id="opponent-command"></div>
+    <div class="row" id="player-command"></div>
+    <div class="row" id="player-charge">
+      <div>⚫️</div>
+      <div>⚫️</div>
+      <div>⚫️</div>
+    </div>
+    <div class="row" id="message">↑</div>
+    <div class="row" id="entry"></div>
+  </div>
+  <div class="container">
+    <div id="commands">
+      <button id="defend-button">防御</button>
+      <button id="charge-button">溜め</button>
+      <button id="attack-button">攻撃</button>
+    </div>
+  </div>
+  <div class="container">
+    <button id="start-button">START</button>
+  </div>
+  <script src="main.js"></script>
+</body>
+
+</html>
