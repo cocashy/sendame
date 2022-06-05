@@ -60,7 +60,7 @@ class Game {
       this.signal.turnOn(2);
       if (this.player.entryDOM.innerText === "") {
         this.isOver = true;
-        this.messageDOM.innerText = "[ERROR] No command is entered...";
+        this.messageDOM.innerText = "[ERROR] No command is entered";
       }
       this.player.sendCommand();
       this.opponent.sendCommand();
