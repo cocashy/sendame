@@ -12,7 +12,9 @@ document.getElementById("commands").onclick = (e) => {
   }
   const key = commandDict[input];
   if (key === undefined) return;
-  const keyDownEvent = new KeyboardEvent("keydown", { "key": key });
+  const keyDownEvent = new KeyboardEvent("keydown", {
+    "key": key
+  });
   document.dispatchEvent(keyDownEvent);
 
   if (!game.isStart) {
@@ -81,21 +83,21 @@ class Game {
 
   checkGameSet() {
     if (
-      this.player.charge.count >= 3
-      && this.opponent.charge.count >= 3
-      && this.player.commandDOM.innerText === "攻撃"
-      && this.opponent.commandDOM.innerText === "攻撃"
+      this.player.charge.count >= 3 &&
+      this.opponent.charge.count >= 3 &&
+      this.player.commandDOM.innerText === "攻撃" &&
+      this.opponent.commandDOM.innerText === "攻撃"
     ) {
       return;
     }
 
     if (
       (
-        this.player.charge.count >= 3
-        && this.player.commandDOM.innerText === "攻撃"
-      ) || (
+        this.player.charge.count >= 3 &&
         this.player.commandDOM.innerText === "攻撃"
-        && this.opponent.commandDOM.innerText === "溜め"
+      ) || (
+        this.player.commandDOM.innerText === "攻撃" &&
+        this.opponent.commandDOM.innerText === "溜め"
       )
     ) {
       this.isOver = true;
@@ -104,11 +106,11 @@ class Game {
 
     if (
       (
-        this.opponent.charge.count >= 3
-        && this.opponent.commandDOM.innerText === "攻撃"
+        this.opponent.charge.count >= 3 &&
+        this.opponent.commandDOM.innerText === "攻撃"
       ) || (
-        this.player.commandDOM.innerText === "溜め"
-        && this.opponent.commandDOM.innerText === "攻撃"
+        this.player.commandDOM.innerText === "溜め" &&
+        this.opponent.commandDOM.innerText === "攻撃"
       )
     ) {
       this.isOver = true;
@@ -118,10 +120,10 @@ class Game {
 
   updateCharge() {
     if (
-      this.player.charge.count >= 3
-      && this.opponent.charge.count >= 3
-      && this.player.commandDOM.innerText === "攻撃"
-      && this.opponent.commandDOM.innerText === "攻撃"
+      this.player.charge.count >= 3 &&
+      this.opponent.charge.count >= 3 &&
+      this.player.commandDOM.innerText === "攻撃" &&
+      this.opponent.commandDOM.innerText === "攻撃"
     ) {
       this.player.charge.turnOffAll();
       this.opponent.charge.turnOffAll();
@@ -166,7 +168,7 @@ class Charge extends Signal {
   sub() {
     const count = this.count;
     if (count <= 0) return;
-    this.turnOff(count-1);
+    this.turnOff(count - 1);
   }
 
   get count() {
