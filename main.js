@@ -56,23 +56,17 @@ class Game {
 
     } else if (this.phase === 2) {
       this.signal.turnOn(2);
-
       if (this.player.entryDOM.innerText === "") {
         this.isOver = true;
         this.messageDOM.innerText = "[ERROR] No command is entered...";
       }
-
       this.player.sendCommand();
       this.opponent.sendCommand();
-
       this.checkGameSet();
 
     } else if (this.phase === 3) {
       this.signal.turnOffAll();
-
-      this.player.updateCharge();
-      this.opponent.updateCharge();
-
+      this.updateCharge();
       this.player.commandDOM.innerText = "";
       this.opponent.commandDOM.innerText = "";
     }
@@ -86,17 +80,54 @@ class Game {
   }
 
   checkGameSet() {
-    if (this.player.commandDOM.innerText === "攻撃") {
-      if (this.opponent.commandDOM.innerText === "溜め" || this.player.charge.count >= 3) {
-        this.isOver = true;
-        this.messageDOM.innerText = "[GAME SET] You win!";
-      }
-    } else if (this.opponent.commandDOM.innerText === "攻撃") {
-      if (this.player.commandDOM.innerText === "溜め" || this.opponent.charge.count >= 3) {
-        this.isOver = true;
-        this.messageDOM.innerText = "[GAME SET] You lose...";
-      }
+    if (
+      this.player.charge.count >= 3
+      && this.opponent.charge.count >= 3
+      && this.player.commandDOM.innerText === "攻撃"
+      && this.opponent.commandDOM.innerText === "攻撃"
+    ) {
+      return;
     }
+
+    if (
+      (
+        this.player.charge.count >= 3
+        && this.player.commandDOM.innerText === "攻撃"
+      ) || (
+        this.player.commandDOM.innerText === "攻撃"
+        && this.opponent.commandDOM.innerText === "溜め"
+      )
+    ) {
+      this.isOver = true;
+      this.messageDOM.innerText = "[GAME SET] You win!";
+    }
+
+    if (
+      (
+        this.opponent.charge.count >= 3
+        && this.opponent.commandDOM.innerText === "攻撃"
+      ) || (
+        this.player.commandDOM.innerText === "溜め"
+        && this.opponent.commandDOM.innerText === "攻撃"
+      )
+    ) {
+      this.isOver = true;
+      this.messageDOM.innerText = "[GAME SET] You lose...";
+    }
+  }
+
+  updateCharge() {
+    if (
+      this.player.charge.count >= 3
+      && this.opponent.charge.count >= 3
+      && this.player.commandDOM.innerText === "攻撃"
+      && this.opponent.commandDOM.innerText === "攻撃"
+    ) {
+      this.player.charge.turnOffAll();
+      this.opponent.charge.turnOffAll();
+    }
+    this.player.updateCharge();
+    this.opponent.updateCharge();
   }
 }
 
